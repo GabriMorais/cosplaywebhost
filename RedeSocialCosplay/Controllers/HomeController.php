@@ -32,6 +32,25 @@
                     }
                     
                 }
+
+
+                if(isset($_POST['post_feed'])){
+                    if($_POST['texto_post'] == '' ){
+                        \RedeSocialCosplay\Utilidades::alerta('Post vazio não pode ser publicado'); 
+                        \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH);
+                    }
+                    \RedeSocialCosplay\Models\HomeModel::postFeed($_POST['texto_post']);
+                    \RedeSocialCosplay\Utilidades::alerta('Postagem publicada'); 
+                    \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH);    
+                }
+
+                if (isset($_GET['habilitarPost'])){
+                    $idPost = (int) $_GET['habilitarPost']; 
+                    \RedeSocialCosplay\Utilidades::alerta($idPost); 
+                    \RedeSocialCosplay\Models\HomeModel::habilitarPost($idPost);
+                    \RedeSocialCosplay\Utilidades::alerta('Post Habilitado'); 
+                    \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH);    
+                }
                 \RedeSocialCosplay\Views\MainView::render('home');
             }else {
 

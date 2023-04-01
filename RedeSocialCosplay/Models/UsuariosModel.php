@@ -27,7 +27,7 @@
         public static function solicitarAmizade($idPara){
             $pdo = \RedeSocialCosplay\mySQL::conectar();
 
-            $verificarAmizade = $pdo->prepare("select *from amizades where (enviou = ? and recebeu = ?) or (enviou = ? and recebeu = ?)");
+            $verificarAmizade = $pdo->prepare("select * from amizades where (enviou = ? and recebeu = ?) or (enviou = ? and recebeu = ?)");
             $verificarAmizade->execute(array($_SESSION['id'],$idPara,$idPara,$_SESSION['id'])) ;
 
             if ($verificarAmizade->rowCount() == 1){
@@ -131,7 +131,18 @@
 
             return $listaAmigosInformacoes;
         } 
-
+        public static function usuarioModerador(){
+            $pdo = \RedeSocialCosplay\mySQL::conectar();
+            $verificarSeUsusarioModerador = $pdo->prepare("select * from usuarios where id = ? and moderador = 1");
+            $verificarSeUsusarioModerador->execute(array($_SESSION['id'])) ;
+            
+            
+            if ($verificarSeUsusarioModerador->rowCount() == 1){
+                return true;
+            }else {
+                return false;   
+            }
+        } 
 
     }
 
