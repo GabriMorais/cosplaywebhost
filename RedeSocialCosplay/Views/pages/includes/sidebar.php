@@ -9,7 +9,7 @@
                 <br/>
 
                 <a href="<?php echo INCLUDE_PATH ?>"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Feed</a>
-				<a href="#"><i class="fa fa-user-o" aria-hidden="true"></i> Perfil</a>
+				<a href="<?php echo INCLUDE_PATH ?>perfil"><i class="fa fa-user-o" aria-hidden="true"></i> Perfil</a>
 				<a href="<?php echo INCLUDE_PATH ?>comunidade"><i class="fa fa-users" aria-hidden="true"></i> Amigos</a>
                 <a href="<?php echo INCLUDE_PATH ?>?loggout">Loggout</a>
 

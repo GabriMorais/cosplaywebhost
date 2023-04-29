@@ -124,7 +124,8 @@
             
             foreach ($amigos as $key => $value) {
                 $listaAmigosInformacoes[$key]['nome'] = self::getUsuario($value)['nome']; 
-                $listaAmigosInformacoes[$key]['email'] = self::getUsuario($value)['email'];  
+                $listaAmigosInformacoes[$key]['email'] = self::getUsuario($value)['email']; 
+                $listaAmigosInformacoes[$key]['img'] = self::getUsuario($value)['img']; 
                 
                 
             }

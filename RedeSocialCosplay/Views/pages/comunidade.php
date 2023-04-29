@@ -27,7 +27,14 @@
 						?>
 						<div class="comunidade-container-amigos-usuario">
 							<div class="comunidade-container-amigos-usuario-img">
+							<?php
+									if($value['img'] == ''){
+								?>
 								<img src="<?php echo INCLUDE_PATH_STATIC ?>images/avatar.jpg" />
+
+							<?php }else{ ?>
+								<img src="<?php echo INCLUDE_PATH ?>/<?php echo $value['img'] ?>" />
+							<?php } ?>
 							</div>
 							<div class="comunidade-container-amigos-usuario-info">
 								<h2><?php echo $value['nome']; ?></h2>
@@ -61,7 +68,14 @@
 						?>
 						<div class="comunidade-container-comunidade-usuario">
 							<div class="comunidade-container-comunidade-usuario-img">
+							<?php
+									if($value['img'] == ''){
+								?>
 								<img src="<?php echo INCLUDE_PATH_STATIC ?>images/avatar.jpg" />
+
+							<?php }else{ ?>
+								<img src="<?php echo INCLUDE_PATH ?>/<?php echo $value['img'] ?>" />
+							<?php } ?>
 							</div>
 							<div class="comunidade-container-comunidade-usuario-info">
 								<h2><?php echo $value['nome'];?></h2>

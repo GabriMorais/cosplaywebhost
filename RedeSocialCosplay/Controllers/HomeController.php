@@ -35,11 +35,12 @@
 
 
                 if(isset($_POST['post_feed'])){
+                    
                     if($_POST['texto_post'] == '' ){
                         \RedeSocialCosplay\Utilidades::alerta('Post vazio não pode ser publicado'); 
                         \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH);
                     }
-                    \RedeSocialCosplay\Models\HomeModel::postFeed($_POST['texto_post']);
+                    \RedeSocialCosplay\Models\HomeModel::postFeed($_POST['texto_post'],$_FILES['file']['tmp_name']);
                     \RedeSocialCosplay\Utilidades::alerta('Postagem publicada'); 
                     \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH);    
                 }
@@ -68,9 +69,10 @@
                         $dadosBanco = $verifica->fetch();
                         $senhabanco = $dadosBanco['senha'];
                         if( \RedeSocialCosplay\Bcrypt::check($senha,$senhabanco)){
-                            $_SESSION['login'] = $dadosBanco['email'];
-                            $_SESSION['id']    = $dadosBanco['id'];
-                            $_SESSION['nome']  = explode(' ',$dadosBanco['nome'])[0];
+                            $_SESSION['login']  = $dadosBanco['email'];
+                            $_SESSION['id']     = $dadosBanco['id'];
+                            $_SESSION['img']    = $dadosBanco['img'];
+                            $_SESSION['nome']   = explode(' ',$dadosBanco['nome'])[0];
                             \RedeSocialCosplay\Utilidades::alerta('Logado.');   
                             \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH); 
                         }else{

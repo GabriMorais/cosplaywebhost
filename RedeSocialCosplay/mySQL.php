@@ -1,6 +1,6 @@
 <?php
     namespace RedeSocialCosplay;
-    class Mysql{
+    class mySQL{
         private static $pdo;
 
 		public static function conectar(){

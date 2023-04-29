@@ -18,8 +18,9 @@
         <div class = "feed">
             <div class="feed-wraper">
                 <div class = "feed-form">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <textarea required="" name = "texto_post"></textarea>
+                        <input type="file"   name=  "file">
                         <input type="hidden" name = "post_feed">
                         <input type="submit" name = "acao" value="Postar">
                     </form>
@@ -33,15 +34,29 @@
                 <div class = "feed-post"> 
                     <div class = "feed-post-autor">
                         <div class = "feed-post-autor-foto">
-                            <img src="<?php echo INCLUDE_PATH_STATIC ?>images/avatar.jpg" >    
+                        <?php
+							if($value['img'] == ''){
+						?>
+						<img src="<?php echo INCLUDE_PATH_STATIC ?>images/avatar.jpg" />
+					<?php }else { ?>
+						<img src="<?php echo INCLUDE_PATH ?>/<?php echo $value['img'] ?>" />
+					<?php } ?>  
                         </div>
                         <div class = "feed-post-autor-informacoes">
                             <h3><?php echo $value['usuario']?></h3> 
                             <p><?php echo date('d/m/Y H:i:s',strtotime($value['data'])) ?></p>    
                         </div>
                     </div>
-                    <div class = "feed-post-autor-texto-do-post">
-                        <?php echo $value['conteudo']?>
+                    <div class = "feed-post-autor-texto">
+                        <?php echo $value['conteudo'];
+                       //echo '<img style="max-width:350px;width:200%;" src="'.INCLUDE_PATH.'/'.$value['imgPost'].'" />'; 
+                    
+						if($value['imgPost'] <> ''){
+                        ?>
+                        <img src="<?php echo INCLUDE_PATH ?>/<?php echo $value['imgPost'] ?>" />  
+                        <?php } ?> 
+                         
+                       
                     </div>
 
                    
@@ -67,7 +82,14 @@
                         $usuarioInfo = \RedeSocialCosplay\Models\UsuariosModel::getUsuario($value['enviou']);
                 ?>
                 <div class = "solicitacoes-de-amizade-disponiveis">
-                    <img src="<?php echo INCLUDE_PATH_STATIC ?>images/avatar.jpg" >
+                    <?php
+									if($usuarioInfo['img'] == ''){
+								?>
+								<img src="<?php echo INCLUDE_PATH_STATIC ?>images/avatar.jpg" />
+
+							<?php }else{ ?>
+								<img src="<?php echo INCLUDE_PATH ?>/<?php echo $usuarioInfo['img'] ?>" />
+							<?php } ?>
                     <div class = "solicitacoes-de-amizade-disponiveis-informacoes"> 
                         <h4><?php echo $usuarioInfo['nome']?></h4>
                         <p><a href="<?php echo INCLUDE_PATH ?>?aceitarAmizade=<?php echo $usuarioInfo['id']?>">Aceitar</a> | <a href="<?php echo INCLUDE_PATH ?>?recusarAmizade=<?php echo $usuarioInfo['id']?>">Recusar</a></p>  
