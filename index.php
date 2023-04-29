@@ -8,4 +8,5 @@ define('INCLUDE_PATH','https://redesocialcosplay.000webhostapp.com/');
 $app = new RedeSocialCosplay\Aplicacao();
 $app->run();
 
+
 ?>
