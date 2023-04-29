@@ -60,6 +60,7 @@
                     </div>
 
                    
+                    
 					<div class="btn-solicitar-amizade">
 						<?php 
 							if ( ((int)$value['status'] == 0)  and ((int)$value['usuario_id'] <> $_SESSION['id'])){
