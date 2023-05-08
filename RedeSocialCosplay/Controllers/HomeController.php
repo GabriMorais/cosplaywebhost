@@ -47,9 +47,15 @@
 
                 if (isset($_GET['habilitarPost'])){
                     $idPost = (int) $_GET['habilitarPost']; 
-                    \RedeSocialCosplay\Utilidades::alerta($idPost); 
                     \RedeSocialCosplay\Models\HomeModel::habilitarPost($idPost);
                     \RedeSocialCosplay\Utilidades::alerta('Post Habilitado'); 
+                    \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH);    
+                }
+                
+                if (isset($_GET['excluirPost'])){
+                    $idPost = (int) $_GET['excluirPost']; 
+                    \RedeSocialCosplay\Models\HomeModel::excluirPost($idPost);
+                    \RedeSocialCosplay\Utilidades::alerta('Post Excluído'); 
                     \RedeSocialCosplay\Utilidades::redirect(INCLUDE_PATH);    
                 }
                 \RedeSocialCosplay\Views\MainView::render('home');

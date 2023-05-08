@@ -26,7 +26,7 @@
                 
                 else{
                     $senha = \RedeSocialCosplay\Bcrypt::hash($senha);
-                    $registro = \RedeSocialCosplay\mySQL::conectar()->prepare("Insert into usuarios values (null,?,?,?,'')");
+                    $registro = \RedeSocialCosplay\mySQL::conectar()->prepare("Insert into usuarios values (null,?,?,?,0,'')");
                     $registro->execute(array($nome,$email,$senha));
 
                     \RedeSocialCosplay\Utilidades::alerta('Registrado com sucesso!');   

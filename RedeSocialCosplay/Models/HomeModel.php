@@ -87,11 +87,11 @@
 			}
 			$poststeste[] = $_SESSION['id'];
 			$posts = [];
-			$texto = "select posts.data, posts.post, usuarios.nome, posts.status,posts.id,posts.usuario_id,usuarios.img,posts.imgPost 
+			$texto = "select posts.data, posts.post, usuarios.nome, posts.status,posts.id,posts.usuario_id,usuarios.img,posts.imgPost,usuarios.moderador 
 			from posts left join usuarios on posts.usuario_id = usuarios.id 
 			where $where (posts.usuario_id = ?)  order by posts.data DESC";
 			if (\RedeSocialCosplay\Models\UsuariosModel::usuarioModerador()){
-				$texto = "select posts.data, posts.post, usuarios.nome, posts.status,posts.id,posts.usuario_id,usuarios.img,posts.imgPost  from posts left join usuarios on posts.usuario_id = usuarios.id order by posts.data DESC";
+				$texto = "select posts.data, posts.post, usuarios.nome, posts.status,posts.id,posts.usuario_id,usuarios.img,posts.imgPost,usuarios.moderador  from posts left join usuarios on posts.usuario_id = usuarios.id order by posts.data DESC";
 				$BuscarPostsBanco =  $pdo->prepare($texto);
 			
 				$BuscarPostsBanco->execute();
@@ -108,10 +108,11 @@
 				$posts[$key]['img'] = $value['img'];
 				$posts[$key]['data'] = $value['data'];
 				$posts[$key]['conteudo'] = $value['post'];
-				$posts[$key]['status'] = $value['status'];
+				$posts[$key]['statuss'] = $value['status'];
 				$posts[$key]['id'] = $value['id'];	
 				$posts[$key]['usuario_id'] = $value['usuario_id'];
 				$posts[$key]['imgPost'] = $value['imgPost'];
+				$posts[$key]['moderador'] = $value['moderador'];
 			}			
 			return $posts;
 
@@ -125,6 +126,20 @@
 			
 				
 			$habilitarPostFeed = $pdo->prepare("update posts set status = 1 where id = ?"); 
+			$habilitarPostFeed->execute(array($idPost));
+
+			//$atualizaUsuario = $pdo->prepare("UPDATE usuarios SET ultimo_post = ? WHERE id = ?");
+			//$atualizaUsuario->execute(array(date('Y-m-d H:i:s',time()),$_SESSION['id']));
+			
+		}
+		
+		public static function excluirPost($idPost){
+			$pdo = \RedeSocialCosplay\mySQL::conectar();
+			
+				
+			
+				
+			$habilitarPostFeed = $pdo->prepare("delete from posts where id = ?"); 
 			$habilitarPostFeed->execute(array($idPost));
 
 			//$atualizaUsuario = $pdo->prepare("UPDATE usuarios SET ultimo_post = ? WHERE id = ?");
